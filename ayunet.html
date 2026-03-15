@@ -1,0 +1,3630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AyuNet - Your Trusted Healthcare Companion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #20c997;
+            --accent-color: #ff6b6b;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --text-color: #333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #fff;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        nav {
+            display: flex;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .auth-buttons {
+            display: flex;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 14px;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+        }
+        
+        .btn-large {
+            padding: 12px 25px;
+            font-size: 16px;
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(13, 110, 253, 0.85), rgba(13, 110, 253, 0.85)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-light {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .btn-light:hover {
+            background-color: var(--light-color);
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-color);
+        }
+        
+        /* Appointment Section - Interactive */
+        .appointment {
+            background-color: var(--light-color);
+        }
+        
+        .appointment-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .appointment-tabs {
+            display: flex;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .appointment-tab {
+            padding: 12px 15px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6c757d;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+        
+        .appointment-tab.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .appointment-tab i {
+            margin-right: 8px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .booking-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2);
+        }
+        
+        .doctor-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .doctor-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .doctor-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+        
+        .doctor-card.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+        
+        .doctor-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .doctor-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+        
+        .doctor-info h4 {
+            margin-bottom: 5px;
+            color: var(--dark-color);
+            font-size: 16px;
+        }
+        
+        .doctor-info p {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .doctor-rating {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .stars {
+            color: #ffc107;
+            margin-right: 5px;
+        }
+        
+        .rating-text {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .calendar-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-nav {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            min-width: 280px;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        
+        .calendar-day:hover {
+            background-color: var(--light-color);
+        }
+        
+        .calendar-day.selected {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .calendar-day.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .time-slot {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        
+        .time-slot:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .time-slot.selected {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .time-slot.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .booking-summary {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .summary-row:last-child {
+            margin-bottom: 0;
+            padding-top: 10px;
+            border-top: 1px solid #dee2e6;
+            font-weight: 500;
+        }
+        
+        .toll-free {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .toll-free i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .toll-free-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .toll-free-number {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        /* Home Healthcare Section - Interactive */
+        .services-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .service-tabs {
+            display: flex;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .service-tab {
+            padding: 12px 15px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6c757d;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+        
+        .service-tab.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .service-tab i {
+            margin-right: 8px;
+        }
+        
+        .service-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .service-packages {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .service-package {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .service-package:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+        
+        .service-package.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+        
+        .package-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .package-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+        
+        .package-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .package-price span {
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: #6c757d;
+        }
+        
+        .package-features {
+            list-style: none;
+            margin-bottom: 15px;
+            padding: 0;
+        }
+        
+        .package-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f1f1;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .package-features li i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+        
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .booking-schedule {
+            margin-top: 20px;
+        }
+        
+        .frequency-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .frequency-option {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .frequency-option:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .frequency-option.selected {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .frequency-option i {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        /* Emergency Section - Interactive */
+        .emergency-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .emergency-map {
+            height: 200px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .map-placeholder i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .map-placeholder p {
+            font-size: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .emergency-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .emergency-action {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .emergency-action:hover {
+            background-color: #e9ecef;
+            transform: translateY(-5px);
+        }
+        
+        .emergency-action i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .emergency-action h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+        
+        .nearby-ambulances {
+            margin-top: 20px;
+        }
+        
+        .ambulance-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .ambulance-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+        
+        .ambulance-card:hover {
+            box-shadow: var(--shadow);
+        }
+        
+        .ambulance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .ambulance-name {
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 16px;
+        }
+        
+        .ambulance-distance {
+            font-size: 14px;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        .ambulance-eta {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        .ambulance-contact {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .ambulance-contact button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .call-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .call-btn:hover {
+            background-color: #1ba085;
+        }
+        
+        .book-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .book-btn:hover {
+            background-color: #0b5ed7;
+        }
+        
+        /* Availability Section - Interactive */
+        .availability-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .availability-search {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .resource-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .resource-type {
+            padding: 10px 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .resource-type:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .resource-type.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .resource-type i {
+            margin-right: 8px;
+        }
+        
+        .availability-results {
+            margin-top: 20px;
+        }
+        
+        .hospital-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .hospital-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+        
+        .hospital-card:hover {
+            box-shadow: var(--shadow);
+        }
+        
+        .hospital-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .hospital-name {
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 16px;
+        }
+        
+        .hospital-distance {
+            font-size: 14px;
+            color: #6c757d;
+            white-space: nowrap;
+        }
+        
+        .resource-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .resource-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--accent-color);
+        }
+        
+        .resource-details h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .resource-availability {
+            font-size: 14px;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        .hospital-contact {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .hospital-contact button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .call-hospital-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .call-hospital-btn:hover {
+            background-color: #1ba085;
+        }
+        
+        .get-directions-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .get-directions-btn:hover {
+            background-color: #0b5ed7;
+        }
+        
+        /* Store Section - Interactive */
+        .store-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .product-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .product-category {
+            padding: 10px 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .product-category:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .product-category.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .product-category i {
+            margin-right: 8px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .product-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 150px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-img i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .product-description {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 15px;
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background-color: var(--light-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #e9ecef;
+        }
+        
+        .quantity-input {
+            width: 40px;
+            height: 30px;
+            border: none;
+            text-align: center;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .add-to-cart-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .add-to-cart-btn:hover {
+            background-color: #0b5ed7;
+        }
+        
+        /* Revenue Section - Interactive */
+        .revenue-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .revenue-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .metric-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .revenue-chart {
+            height: 200px;
+            background-color: var(--light-color);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chart-placeholder {
+            text-align: center;
+        }
+        
+        .chart-placeholder i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .revenue-sources {
+            margin-top: 20px;
+        }
+        
+        .source-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .source-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+        
+        .source-card:hover {
+            box-shadow: var(--shadow);
+        }
+        
+        .source-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .source-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .source-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .source-percentage {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .source-description {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        /* Promotion Section - Interactive */
+        .promotion-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .campaign-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .campaign-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .campaign-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .campaign-icon {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .campaign-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .campaign-label {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .media-channels {
+            margin-top: 20px;
+        }
+        
+        .channel-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .channel-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+        
+        .channel-card:hover {
+            box-shadow: var(--shadow);
+        }
+        
+        .channel-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .channel-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+        
+        .channel-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .channel-reach {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .channel-description {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .medical-camps {
+            margin-top: 20px;
+        }
+        
+        .camp-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .camp-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .camp-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+        
+        .camp-img {
+            height: 120px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .camp-info {
+            padding: 15px;
+        }
+        
+        .camp-location {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .camp-location i {
+            margin-right: 5px;
+        }
+        
+        .camp-date {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .camp-date i {
+            margin-right: 5px;
+        }
+        
+        .camp-description {
+            font-size: 14px;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+        
+        .camp-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .camp-actions button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .register-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .register-btn:hover {
+            background-color: #0b5ed7;
+        }
+        
+        .details-btn {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        .details-btn:hover {
+            background-color: #e9ecef;
+        }
+        
+        /* Why Choose Us Section - Interactive */
+        .benefits-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .benefit-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .benefit-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+        
+        .benefit-card.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .benefit-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .benefit-description {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .benefit-action {
+            padding: 10px;
+            border: 1px solid var(--primary-color);
+            border-radius: 30px;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s;
+            background-color: white;
+            font-size: 14px;
+        }
+        
+        .benefit-action:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 14px;
+        }
+        
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+        
+        .close:hover {
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2);
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .form-options a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background-color: #0b5ed7;
+        }
+        
+        .user-type {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .user-type button {
+            flex: 1;
+            padding: 10px;
+            background-color: #f1f5f9;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .user-type button:first-child {
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .user-type button:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .user-type button.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background-color: white;
+                box-shadow: var(--shadow);
+                z-index: 99;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            nav ul li {
+                margin: 0 0 15px 0;
+            }
+            
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 40px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .booking-form,
+            .service-form,
+            .availability-search,
+            .emergency-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .appointment-tabs,
+            .service-tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 5px;
+            }
+            
+            .toll-free {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .toll-free-number {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+            
+            .frequency-options {
+                flex-direction: column;
+            }
+            
+            .revenue-metrics,
+            .campaign-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .product-actions .quantity-control {
+                margin-bottom: 10px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section {
+                padding: 50px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .doctor-list,
+            .service-packages,
+            .ambulance-list,
+            .hospital-list,
+            .products-grid,
+            .source-list,
+            .channel-list,
+            .camp-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .revenue-metrics,
+            .campaign-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>AyuNet</span>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#appointment">Appointments</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#emergency">Emergency</a></li>
+                    <li><a href="#availability">Availability</a></li>
+                    <li><a href="#store">Store</a></li>
+                    <li><a href="#revenue">Revenue</a></li>
+                    <li><a href="#promotion">Promotion</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-outline" id="loginBtn">Login</a>
+                <a href="#" class="btn btn-primary" id="registerBtn">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>AyuNet: Your Trusted Healthcare Companion</h1>
+            <p>A comprehensive platform blending service and product offerings to revolutionise healthcare accessibility and delivery across India.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-light btn-large">Get Started</a>
+                <a href="#services" class="btn btn-outline btn-large">Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Section - Interactive -->
+    <section class="section appointment" id="appointment">
+        <div class="container">
+            <div class="section-title">
+                <h2>Book Your Appointment</h2>
+                <p>Experience seamless healthcare booking with our interactive platform</p>
+            </div>
+            
+            <div class="appointment-container">
+                <div class="appointment-tabs">
+                    <div class="appointment-tab active" data-tab="online">
+                        <i class="fas fa-laptop"></i> Online Booking
+                    </div>
+                    <div class="appointment-tab" data-tab="phone">
+                        <i class="fas fa-phone"></i> Phone Booking
+                    </div>
+                    <div class="appointment-tab" data-tab="hospital">
+                        <i class="fas fa-hospital"></i> Hospital Kiosk
+                    </div>
+                </div>
+                
+                <!-- Online Booking Tab -->
+                <div class="tab-content active" id="online">
+                    <div class="booking-form">
+                        <div class="form-group">
+                            <label for="specialty">Medical Specialty</label>
+                            <select class="form-control" id="specialty">
+                                <option value="">Select Specialty</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="dermatology">Dermatology</option>
+                                <option value="endocrinology">Endocrinology</option>
+                                <option value="gastroenterology">Gastroenterology</option>
+                                <option value="neurology">Neurology</option>
+                                <option value="orthopedics">Orthopedics</option>
+                                <option value="pediatrics">Pediatrics</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <select class="form-control" id="location">
+                                <option value="">Select Location</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="delhi">Delhi</option>
+                                <option value="bangalore">Bangalore</option>
+                                <option value="chennai">Chennai</option>
+                                <option value="kolkata">Kolkata</option>
+                                <option value="hyderabad">Hyderabad</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="doctor-search">Search Doctor or Hospital</label>
+                            <input type="text" class="form-control" id="doctor-search" placeholder="Enter doctor name or hospital name">
+                        </div>
+                    </div>
+                    
+                    <div class="doctor-list" id="doctor-list">
+                        <div class="doctor-card">
+                            <div class="doctor-header">
+                                <div class="doctor-avatar">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="doctor-info">
+                                    <h4>Dr. Rajesh Sharma</h4>
+                                    <p>Cardiologist • Apollo Hospital</p>
+                                </div>
+                            </div>
+                            <div class="doctor-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-text">4.5 (128 reviews)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="doctor-card">
+                            <div class="doctor-header">
+                                <div class="doctor-avatar">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="doctor-info">
+                                    <h4>Dr. Priya Singh</h4>
+                                    <p>Cardiologist • Fortis Hospital</p>
+                                </div>
+                            </div>
+                            <div class="doctor-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">5.0 (89 reviews)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="doctor-card">
+                            <div class="doctor-header">
+                                <div class="doctor-avatar">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="doctor-info">
+                                    <h4>Dr. Anil Kumar</h4>
+                                    <p>Cardiologist • Max Hospital</p>
+                                </div>
+                            </div>
+                            <div class="doctor-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text">4.0 (64 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button class="calendar-nav"><i class="fas fa-chevron-left"></i></button>
+                            <h3>June 2023</h3>
+                            <button class="calendar-nav"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        
+                        <div class="calendar-grid">
+                            <div class="calendar-day">Sun</div>
+                            <div class="calendar-day">Mon</div>
+                            <div class="calendar-day">Tue</div>
+                            <div class="calendar-day">Wed</div>
+                            <div class="calendar-day">Thu</div>
+                            <div class="calendar-day">Fri</div>
+                            <div class="calendar-day">Sat</div>
+                            
+                            <div class="calendar-day disabled">28</div>
+                            <div class="calendar-day disabled">29</div>
+                            <div class="calendar-day disabled">30</div>
+                            <div class="calendar-day disabled">31</div>
+                            <div class="calendar-day">1</div>
+                            <div class="calendar-day">2</div>
+                            <div class="calendar-day">3</div>
+                            
+                            <div class="calendar-day">4</div>
+                            <div class="calendar-day">5</div>
+                            <div class="calendar-day">6</div>
+                            <div class="calendar-day">7</div>
+                            <div class="calendar-day">8</div>
+                            <div class="calendar-day">9</div>
+                            <div class="calendar-day">10</div>
+                            
+                            <div class="calendar-day">11</div>
+                            <div class="calendar-day">12</div>
+                            <div class="calendar-day">13</div>
+                            <div class="calendar-day">14</div>
+                            <div class="calendar-day selected">15</div>
+                            <div class="calendar-day">16</div>
+                            <div class="calendar-day">17</div>
+                            
+                            <div class="calendar-day">18</div>
+                            <div class="calendar-day">19</div>
+                            <div class="calendar-day">20</div>
+                            <div class="calendar-day">21</div>
+                            <div class="calendar-day">22</div>
+                            <div class="calendar-day">23</div>
+                            <div class="calendar-day">24</div>
+                            
+                            <div class="calendar-day">25</div>
+                            <div class="calendar-day">26</div>
+                            <div class="calendar-day">27</div>
+                            <div class="calendar-day">28</div>
+                            <div class="calendar-day">29</div>
+                            <div class="calendar-day">30</div>
+                            <div class="calendar-day disabled">1</div>
+                        </div>
+                        
+                        <div class="time-slots">
+                            <div class="time-slot">09:00 AM</div>
+                            <div class="time-slot">10:00 AM</div>
+                            <div class="time-slot">11:00 AM</div>
+                            <div class="time-slot disabled">12:00 PM</div>
+                            <div class="time-slot">02:00 PM</div>
+                            <div class="time-slot selected">03:00 PM</div>
+                            <div class="time-slot">04:00 PM</div>
+                            <div class="time-slot">05:00 PM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-summary">
+                        <div class="summary-row">
+                            <span>Doctor:</span>
+                            <span>Dr. Priya Singh</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Hospital:</span>
+                            <span>Fortis Hospital</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Date:</span>
+                            <span>June 15, 2023</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Time:</span>
+                            <span>03:00 PM</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Fee:</span>
+                            <span>₹800</span>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-primary btn-large">Confirm Appointment</button>
+                    </div>
+                </div>
+                
+                <!-- Phone Booking Tab -->
+                <div class="tab-content" id="phone">
+                    <div style="text-align: center; padding: 20px 0;">
+                        <i class="fas fa-phone-alt" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 15px;"></i>
+                        <h3>Call Our Toll-Free Number</h3>
+                        <p style="margin-bottom: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Our dedicated healthcare assistants are available 24/7 to help you book appointments with the best doctors in your area.</p>
+                        
+                        <div class="toll-free">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <span class="toll-free-text">Call us now:</span>
+                                <span class="toll-free-number">1800-123-4567</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+                            <h4 style="margin-bottom: 15px; color: var(--primary-color);">How it works:</h4>
+                            <ol style="padding-left: 20px;">
+                                <li style="margin-bottom: 10px;">Call our toll-free number</li>
+                                <li style="margin-bottom: 10px;">Provide your medical requirements and location</li>
+                                <li style="margin-bottom: 10px;">Our assistant will suggest the best doctors and hospitals</li>
+                                <li style="margin-bottom: 10px;">Select your preferred date and time</li>
+                                <li>Receive a confirmation SMS with appointment details</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hospital Kiosk Tab -->
+                <div class="tab-content" id="hospital">
+                    <div style="text-align: center; padding: 20px 0;">
+                        <i class="fas fa-hospital" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 15px;"></i>
+                        <h3>Visit Our Hospital Kiosks</h3>
+                        <p style="margin-bottom: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Find AyuNet kiosks at partner hospitals for instant appointment booking without any wait time.</p>
+                        
+                        <div style="background-color: var(--light-color); border-radius: 8px; padding: 20px; max-width: 600px; margin-left: auto; margin-right: auto; text-align: left;">
+                            <h4 style="margin-bottom: 15px; color: var(--primary-color); text-align: center;">Features:</h4>
+                            <ul style="padding-left: 20px;">
+                                <li style="margin-bottom: 10px;">Touch-screen interface for easy navigation</li>
+                                <li style="margin-bottom: 10px;">Real-time doctor availability updates</li>
+                                <li style="margin-bottom: 10px;">Instant appointment confirmation</li>
+                                <li style="margin-bottom: 10px;">Printed appointment slip with details</li>
+                                <li>Assistance from hospital staff if needed</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-top: 30px;">
+                            <h4 style="margin-bottom: 15px; color: var(--primary-color);">Find a Kiosk Near You:</h4>
+                            <div class="form-group" style="max-width: 400px; margin-left: auto; margin-right: auto;">
+                                <input type="text" class="form-control" placeholder="Enter your location or pincode">
+                            </div>
+                            <button class="btn btn-primary">Find Kiosks</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Healthcare Services Section - Interactive -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Home Healthcare Services</h2>
+                <p>Book personalized healthcare services delivered to your doorstep</p>
+            </div>
+            
+            <div class="services-container">
+                <div class="service-tabs">
+                    <div class="service-tab active" data-tab="diabetes">
+                        <i class="fas fa-tint"></i> Diabetes Care
+                    </div>
+                    <div class="service-tab" data-tab="cardiac">
+                        <i class="fas fa-heartbeat"></i> Cardiac Care
+                    </div>
+                    <div class="service-tab" data-tab="elderly">
+                        <i class="fas fa-user-friends"></i> Elderly Care
+                    </div>
+                    <div class="service-tab" data-tab="doctor">
+                        <i class="fas fa-user-md"></i> Doctor Visits
+                    </div>
+                </div>
+                
+                <!-- Diabetes Care Tab -->
+                <div class="tab-content active" id="diabetes">
+                    <div class="service-form">
+                        <div class="form-group">
+                            <label for="patient-name">Patient Name</label>
+                            <input type="text" class="form-control" id="patient-name" placeholder="Enter patient name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="patient-age">Age</label>
+                            <input type="number" class="form-control" id="patient-age" placeholder="Enter age">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="patient-gender">Gender</label>
+                            <select class="form-control" id="patient-gender">
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="patient-location">Location</label>
+                            <input type="text" class="form-control" id="patient-location" placeholder="Enter your location">
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin: 20px 0 15px; color: var(--primary-color);">Select a Care Package</h3>
+                    
+                    <div class="service-packages">
+                        <div class="service-package">
+                            <div class="package-header">
+                                <div class="package-name">Basic Care</div>
+                                <div class="package-price">₹2,500 <span>/month</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 4 home visits per month</li>
+                                <li><i class="fas fa-check"></i> Blood sugar monitoring</li>
+                                <li><i class="fas fa-check"></i> Diet consultation</li>
+                                <li><i class="fas fa-check"></i> Monthly report</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Select Package</button>
+                        </div>
+                        
+                        <div class="service-package selected">
+                            <div class="package-header">
+                                <div class="package-name">Standard Care</div>
+                                <div class="package-price">₹4,500 <span>/month</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 8 home visits per month</li>
+                                <li><i class="fas fa-check"></i> Blood sugar monitoring</li>
+                                <li><i class="fas fa-check"></i> Diet consultation</li>
+                                <li><i class="fas fa-check"></i> Weekly reports</li>
+                                <li><i class="fas fa-check"></i> 24/7 teleconsultation</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Selected</button>
+                        </div>
+                        
+                        <div class="service-package">
+                            <div class="package-header">
+                                <div class="package-name">Premium Care</div>
+                                <div class="package-price">₹7,500 <span>/month</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 12 home visits per month</li>
+                                <li><i class="fas fa-check"></i> Continuous glucose monitoring</li>
+                                <li><i class="fas fa-check"></i> Personalized diet plan</li>
+                                <li><i class="fas fa-check"></i> Daily reports</li>
+                                <li><i class="fas fa-check"></i> 24/7 teleconsultation</li>
+                                <li><i class="fas fa-check"></i> Emergency assistance</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Select Package</button>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-schedule">
+                        <h3 style="margin-bottom: 15px; color: var(--primary-color);">Select Visit Frequency</h3>
+                        <div class="frequency-options">
+                            <div class="frequency-option">
+                                <i class="fas fa-calendar-week"></i>
+                                <div>Weekly</div>
+                            </div>
+                            <div class="frequency-option selected">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>Bi-Weekly</div>
+                            </div>
+                            <div class="frequency-option">
+                                <i class="fas fa-calendar"></i>
+                                <div>Monthly</div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn btn-primary btn-large">Book Home Care Service</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cardiac Care Tab -->
+                <div class="tab-content" id="cardiac">
+                    <div class="service-form">
+                        <div class="form-group">
+                            <label for="cardiac-patient-name">Patient Name</label>
+                            <input type="text" class="form-control" id="cardiac-patient-name" placeholder="Enter patient name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardiac-patient-age">Age</label>
+                            <input type="number" class="form-control" id="cardiac-patient-age" placeholder="Enter age">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardiac-condition">Cardiac Condition</label>
+                            <select class="form-control" id="cardiac-condition">
+                                <option value="">Select Condition</option>
+                                <option value="hypertension">Hypertension</option>
+                                <option value="coronary">Coronary Artery Disease</option>
+                                <option value="heart-failure">Heart Failure</option>
+                                <option value="arrhythmia">Arrhythmia</option>
+                                <option value="post-surgery">Post-Surgery Care</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardiac-location">Location</label>
+                            <input type="text" class="form-control" id="cardiac-location" placeholder="Enter your location">
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin: 20px 0 15px; color: var(--primary-color);">Select a Care Package</h3>
+                    
+                    <div class="service-packages">
+                        <div class="service-package">
+                            <div class="package-header">
+                                <div class="package-name">Basic Care</div>
+                                <div class="package-price">₹3,500 <span>/month</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 4 home visits per month</li>
+                                <li><i class="fas fa-check"></i> Blood pressure monitoring</li>
+                                <li><i class="fas fa-check"></i> ECG at home</li>
+                                <li><i class="fas fa-check"></i> Monthly report</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Select Package</button>
+                        </div>
+                        
+                        <div class="service-package selected">
+                            <div class="package-header">
+                                <div class="package-name">Standard Care</div>
+                                <div class="package-price">₹6,500 <span>/month</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 8 home visits per month</li>
+                                <li><i class="fas fa-check"></i> Blood pressure monitoring</li>
+                                <li><i class="fas fa-check"></i> ECG at home</li>
+                                <li><i class="fas fa-check"></i> Weekly reports</li>
+                                <li><i class="fas fa-check"></i> 24/7 teleconsultation</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Selected</button>
+                        </div>
+                        
+                        <div class="service-package">
+                            <div class="package-header">
+                                <div class="package-name">Premium Care</div>
+                                <div class="package-price">₹10,500 <span>/month</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 12 home visits per month</li>
+                                <li><i class="fas fa-check"></i> Continuous BP monitoring</li>
+                                <li><i class="fas fa-check"></i> ECG and Echo at home</li>
+                                <li><i class="fas fa-check"></i> Daily reports</li>
+                                <li><i class="fas fa-check"></i> 24/7 teleconsultation</li>
+                                <li><i class="fas fa-check"></i> Emergency assistance</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Select Package</button>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-schedule">
+                        <h3 style="margin-bottom: 15px; color: var(--primary-color);">Select Visit Frequency</h3>
+                        <div class="frequency-options">
+                            <div class="frequency-option">
+                                <i class="fas fa-calendar-week"></i>
+                                <div>Weekly</div>
+                            </div>
+                            <div class="frequency-option selected">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>Bi-Weekly</div>
+                            </div>
+                            <div class="frequency-option">
+                                <i class="fas fa-calendar"></i>
+                                <div>Monthly</div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn btn-primary btn-large">Book Home Care Service</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Elderly Care Tab -->
+                <div class="tab-content" id="elderly">
+                    <div class="service-form">
+                        <div class="form-group">
+                            <label for="elderly-patient-name">Patient Name</label>
+                            <input type="text" class="form-control" id="elderly-patient-name" placeholder="Enter patient name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="elderly-patient-age">Age</label>
+                            <input type="number" class="form-control" id="elderly-patient-age" placeholder="Enter age">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="elderly-needs">Care Needs</label>
+                            <select class="form-control" id="elderly-needs">
+                                <option value="">Select Care Needs</option>
+                                <option value="basic-assistance">Basic Assistance</option>
+                                <option value="medication">Medication Management</option>
+                                <option value="mobility">Mobility Support</option>
+                                <option value="dementia">Dementia Care</option>
+                                <option value="post-hospitalization">Post-Hospitalization</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="elderly-location">Location</label>
+                            <input type="text" class="form-control" id="elderly-location" placeholder="Enter your location">
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin: 20px 0 15px; color: var(--primary-color);">Select a Care Package</h3>
+                    
+                    <div class="service-packages">
+                        <div class="service-package">
+                            <div class="package-header">
+                                <div class="package-name">Basic Care</div>
+                                <div class="package-price">₹4,000 <span>/month</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 12 home visits per month</li>
+                                <li><i class="fas fa-check"></i> Basic health monitoring</li>
+                                <li><i class="fas fa-check"></i> Medication reminders</li>
+                                <li><i class="fas fa-check"></i> Monthly report</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Select Package</button>
+                        </div>
+                        
+                        <div class="service-package selected">
+                            <div class="package-header">
+                                <div class="package-name">Standard Care</div>
+                                <div class="package-price">₹8,000 <span>/month</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 20 home visits per month</li>
+                                <li><i class="fas fa-check"></i> Comprehensive health monitoring</li>
+                                <li><i class="fas fa-check"></i> Medication management</li>
+                                <li><i class="fas fa-check"></i> Weekly reports</li>
+                                <li><i class="fas fa-check"></i> 24/7 teleconsultation</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Selected</button>
+                        </div>
+                        
+                        <div class="service-package">
+                            <div class="package-header">
+                                <div class="package-name">Premium Care</div>
+                                <div class="package-price">₹15,000 <span>/month</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 30 home visits per month</li>
+                                <li><i class="fas fa-check"></i> 24/7 caregiver availability</li>
+                                <li><i class="fas fa-check"></i> Complete health management</li>
+                                <li><i class="fas fa-check"></i> Daily reports</li>
+                                <li><i class="fas fa-check"></i> 24/7 teleconsultation</li>
+                                <li><i class="fas fa-check"></i> Emergency assistance</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Select Package</button>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-schedule">
+                        <h3 style="margin-bottom: 15px; color: var(--primary-color);">Select Caregiver Schedule</h3>
+                        <div class="frequency-options">
+                            <div class="frequency-option">
+                                <i class="fas fa-sun"></i>
+                                <div>Day Time</div>
+                            </div>
+                            <div class="frequency-option selected">
+                                <i class="fas fa-moon"></i>
+                                <div>24/7 Care</div>
+                            </div>
+                            <div class="frequency-option">
+                                <i class="fas fa-clock"></i>
+                                <div>Flexible Hours</div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn btn-primary btn-large">Book Home Care Service</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Doctor Visits Tab -->
+                <div class="tab-content" id="doctor">
+                    <div class="service-form">
+                        <div class="form-group">
+                            <label for="doctor-patient-name">Patient Name</label>
+                            <input type="text" class="form-control" id="doctor-patient-name" placeholder="Enter patient name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="doctor-specialty">Required Specialty</label>
+                            <select class="form-control" id="doctor-specialty">
+                                <option value="">Select Specialty</option>
+                                <option value="general">General Physician</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="neurology">Neurology</option>
+                                <option value="orthopedics">Orthopedics</option>
+                                <option value="pediatrics">Pediatrics</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="doctor-condition">Medical Condition</label>
+                            <input type="text" class="form-control" id="doctor-condition" placeholder="Brief description of condition">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="doctor-location">Location</label>
+                            <input type="text" class="form-control" id="doctor-location" placeholder="Enter your location">
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin: 20px 0 15px; color: var(--primary-color);">Select a Visit Package</h3>
+                    
+                    <div class="service-packages">
+                        <div class="service-package">
+                            <div class="package-header">
+                                <div class="package-name">Single Visit</div>
+                                <div class="package-price">₹1,500 <span>/visit</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 45-minute consultation</li>
+                                <li><i class="fas fa-check"></i> Basic examination</li>
+                                <li><i class="fas fa-check"></i> Prescription</li>
+                                <li><i class="fas fa-check"></i> Follow-up call</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Select Package</button>
+                        </div>
+                        
+                        <div class="service-package selected">
+                            <div class="package-header">
+                                <div class="package-name">3 Visits Package</div>
+                                <div class="package-price">₹4,000 <span>/package</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 3 home visits</li>
+                                <li><i class="fas fa-check"></i> 45-minute consultations</li>
+                                <li><i class="fas fa-check"></i> Comprehensive examination</li>
+                                <li><i class="fas fa-check"></i> Prescription & reports</li>
+                                <li><i class="fas fa-check"></i> Follow-up support</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Selected</button>
+                        </div>
+                        
+                        <div class="service-package">
+                            <div class="package-header">
+                                <div class="package-name">Chronic Care</div>
+                                <div class="package-price">₹7,500 <span>/month</span></div>
+                            </div>
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> 4 home visits per month</li>
+                                <li><i class="fas fa-check"></i> Continuous monitoring</li>
+                                <li><i class="fas fa-check"></i> Comprehensive care</li>
+                                <li><i class="fas fa-check"></i> Monthly reports</li>
+                                <li><i class="fas fa-check"></i> 24/7 teleconsultation</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Select Package</button>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-schedule">
+                        <h3 style="margin-bottom: 15px; color: var(--primary-color);">Preferred Visit Time</h3>
+                        <div class="frequency-options">
+                            <div class="frequency-option">
+                                <i class="fas fa-sun"></i>
+                                <div>Morning</div>
+                            </div>
+                            <div class="frequency-option selected">
+                                <i class="fas fa-cloud-sun"></i>
+                                <div>Afternoon</div>
+                            </div>
+                            <div class="frequency-option">
+                                <i class="fas fa-moon"></i>
+                                <div>Evening</div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn btn-primary btn-large">Book Doctor Visit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Response Section - Interactive -->
+    <section class="section emergency" id="emergency">
+        <div class="container">
+            <div class="section-title">
+                <h2>Emergency Response</h2>
+                <p>Quick access to emergency services when every second counts</p>
+            </div>
+            
+            <div class="emergency-container">
+                <div class="emergency-map">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Interactive Map Showing Nearby Emergency Services</p>
+                    </div>
+                </div>
+                
+                <div class="emergency-actions">
+                    <div class="emergency-action">
+                        <i class="fas fa-ambulance"></i>
+                        <h3>Book Ambulance</h3>
+                        <p>Find and book nearest ambulance instantly</p>
+                    </div>
+                    <div class="emergency-action">
+                        <i class="fas fa-hospital-alt"></i>
+                        <h3>Find Hospitals</h3>
+                        <p>Locate open hospitals near you</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin: 20px 0 15px; color: var(--primary-color);">Nearby Ambulances</h3>
+                
+                <div class="nearby-ambulances">
+                    <div class="ambulance-list">
+                        <div class="ambulance-card">
+                            <div class="ambulance-header">
+                                <div class="ambulance-name">Apollo Ambulance</div>
+                                <div class="ambulance-distance">1.2 km</div>
+                            </div>
+                            <div class="ambulance-eta">ETA: 5 minutes</div>
+                            <div class="ambulance-contact">
+                                <button class="call-btn"><i class="fas fa-phone"></i> Call</button>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                        
+                        <div class="ambulance-card">
+                            <div class="ambulance-header">
+                                <div class="ambulance-name">Fortis Emergency</div>
+                                <div class="ambulance-distance">2.5 km</div>
+                            </div>
+                            <div class="ambulance-eta">ETA: 8 minutes</div>
+                            <div class="ambulance-contact">
+                                <button class="call-btn"><i class="fas fa-phone"></i> Call</button>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                        
+                        <div class="ambulance-card">
+                            <div class="ambulance-header">
+                                <div class="ambulance-name">Max Rescue</div>
+                                <div class="ambulance-distance">3.8 km</div>
+                            </div>
+                            <div class="ambulance-eta">ETA: 12 minutes</div>
+                            <div class="ambulance-contact">
+                                <button class="call-btn"><i class="fas fa-phone"></i> Call</button>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <div class="toll-free" style="display: inline-flex; max-width: 500px;">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <span class="toll-free-text">Emergency Helpline:</span>
+                            <span class="toll-free-number">1800-123-4567</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Life-Saving Resources Section - Interactive -->
+    <section class="section" id="availability">
+        <div class="container">
+            <div class="section-title">
+                <h2>Life-Saving Resources</h2>
+                <p>Find critical medical supplies and resources instantly</p>
+            </div>
+            
+            <div class="availability-container">
+                <div class="availability-search">
+                    <div class="form-group">
+                        <label for="resource-location">Your Location</label>
+                        <input type="text" class="form-control" id="resource-location" placeholder="Enter your location">
+                    </div>
+                    <div class="form-group">
+                        <label for="resource-radius">Search Radius</label>
+                        <select class="form-control" id="resource-radius">
+                            <option value="5">Within 5 km</option>
+                            <option value="10" selected>Within 10 km</option>
+                            <option value="20">Within 20 km</option>
+                            <option value="50">Within 50 km</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <h3 style="margin: 20px 0 15px; color: var(--primary-color);">Select Resource Type</h3>
+                
+                <div class="resource-types">
+                    <div class="resource-type active">
+                        <i class="fas fa-tint"></i> Blood
+                    </div>
+                    <div class="resource-type">
+                        <i class="fas fa-dna"></i> Organs
+                    </div>
+                    <div class="resource-type">
+                        <i class="fas fa-vial"></i> Platelets
+                    </div>
+                    <div class="resource-type">
+                        <i class="fas fa-pills"></i> Medicines
+                    </div>
+                    <div class="resource-type">
+                        <i class="fas fa-procedures"></i> Equipment
+                    </div>
+                </div>
+                
+                <div class="availability-results">
+                    <h3 style="margin-bottom: 15px; color: var(--primary-color);">Available Resources Near You</h3>
+                    
+                    <div class="hospital-list">
+                        <div class="hospital-card">
+                            <div class="hospital-header">
+                                <div class="hospital-name">Apollo Hospital</div>
+                                <div class="hospital-distance">2.3 km</div>
+                            </div>
+                            <div class="resource-info">
+                                <div class="resource-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                                <div class="resource-details">
+                                    <h4>A+ Blood</h4>
+                                    <div class="resource-availability">5 units available</div>
+                                </div>
+                            </div>
+                            <div class="hospital-contact">
+                                <button class="call-hospital-btn"><i class="fas fa-phone"></i> Call</button>
+                                <button class="get-directions-btn"><i class="fas fa-directions"></i> Directions</button>
+                            </div>
+                        </div>
+                        
+                        <div class="hospital-card">
+                            <div class="hospital-header">
+                                <div class="hospital-name">Fortis Hospital</div>
+                                <div class="hospital-distance">4.7 km</div>
+                            </div>
+                            <div class="resource-info">
+                                <div class="resource-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                                <div class="resource-details">
+                                    <h4>A+ Blood</h4>
+                                    <div class="resource-availability">8 units available</div>
+                                </div>
+                            </div>
+                            <div class="hospital-contact">
+                                <button class="call-hospital-btn"><i class="fas fa-phone"></i> Call</button>
+                                <button class="get-directions-btn"><i class="fas fa-directions"></i> Directions</button>
+                            </div>
+                        </div>
+                        
+                        <div class="hospital-card">
+                            <div class="hospital-header">
+                                <div class="hospital-name">Max Hospital</div>
+                                <div class="hospital-distance">6.1 km</div>
+                            </div>
+                            <div class="resource-info">
+                                <div class="resource-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                                <div class="resource-details">
+                                    <h4>A+ Blood</h4>
+                                    <div class="resource-availability">3 units available</div>
+                                </div>
+                            </div>
+                            <div class="hospital-contact">
+                                <button class="call-hospital-btn"><i class="fas fa-phone"></i> Call</button>
+                                <button class="get-directions-btn"><i class="fas fa-directions"></i> Directions</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AyuNet Store Section - Interactive -->
+    <section class="section store" id="store">
+        <div class="container">
+            <div class="section-title">
+                <h2>AyuNet Store</h2>
+                <p>Quality health and hygiene products delivered to your doorstep</p>
+            </div>
+            
+            <div class="store-container">
+                <div class="product-categories">
+                    <div class="product-category active">
+                        <i class="fas fa-head-side-mask"></i> Masks
+                    </div>
+                    <div class="product-category">
+                        <i class="fas fa-spray-can"></i> Sanitizers
+                    </div>
+                    <div class="product-category">
+                        <i class="fas fa-first-aid"></i> First Aid
+                    </div>
+                    <div class="product-category">
+                        <i class="fas fa-hand-sparkles"></i> Hygiene
+                    </div>
+                    <div class="product-category">
+                        <i class="fas fa-heartbeat"></i> Wellness
+                    </div>
+                </div>
+                
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-img">
+                            <i class="fas fa-head-side-mask"></i>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">AyuNet N95 Mask</div>
+                            <div class="product-description">High-quality protective masks with 5-layer filtration</div>
+                            <div class="product-price">₹299</div>
+                            <div class="product-actions">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn">-</button>
+                                    <input type="text" class="quantity-input" value="1">
+                                    <button class="quantity-btn">+</button>
+                                </div>
+                                <button class="add-to-cart-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-img">
+                            <i class="fas fa-head-side-mask"></i>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">AyuNet Surgical Mask</div>
+                            <div class="product-description">3-ply disposable masks for everyday protection</div>
+                            <div class="product-price">₹149</div>
+                            <div class="product-actions">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn">-</button>
+                                    <input type="text" class="quantity-input" value="1">
+                                    <button class="quantity-btn">+</button>
+                                </div>
+                                <button class="add-to-cart-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-img">
+                            <i class="fas fa-head-side-mask"></i>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">AyuNet Kids Mask</div>
+                            <div class="product-description">Colorful and comfortable masks designed for children</div>
+                            <div class="product-price">₹199</div>
+                            <div class="product-actions">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn">-</button>
+                                    <input type="text" class="quantity-input" value="1">
+                                    <button class="quantity-btn">+</button>
+                                </div>
+                                <button class="add-to-cart-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-img">
+                            <i class="fas fa-spray-can"></i>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">AyuNet Hand Sanitizer</div>
+                            <div class="product-description">70% alcohol-based sanitizer with moisturizers</div>
+                            <div class="product-price">₹179</div>
+                            <div class="product-actions">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn">-</button>
+                                    <input type="text" class="quantity-input" value="1">
+                                    <button class="quantity-btn">+</button>
+                                </div>
+                                <button class="add-to-cart-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-primary btn-large">View All Products</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Revenue Streams Section - Interactive -->
+    <section class="section" id="revenue">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Revenue Streams</h2>
+                <p>Explore how we sustain and grow our healthcare platform</p>
+            </div>
+            
+            <div class="revenue-container">
+                <div class="revenue-metrics">
+                    <div class="metric-card">
+                        <div class="metric-value">₹12.5 Cr</div>
+                        <div class="metric-label">Annual Revenue</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">45%</div>
+                        <div class="metric-label">Growth Rate</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">2.3M</div>
+                        <div class="metric-label">Active Users</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">850+</div>
+                        <div class="metric-label">Partner Hospitals</div>
+                    </div>
+                </div>
+                
+                <div class="revenue-chart">
+                    <div class="chart-placeholder">
+                        <i class="fas fa-chart-line"></i>
+                        <p>Revenue Growth Chart</p>
+                    </div>
+                </div>
+                
+                <div class="revenue-sources">
+                    <h3 style="margin-bottom: 15px; color: var(--primary-color); text-align: center;">Revenue Breakdown</h3>
+                    
+                    <div class="source-list">
+                        <div class="source-card">
+                            <div class="source-header">
+                                <div class="source-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="source-info">
+                                    <h3>Appointment Bookings</h3>
+                                </div>
+                            </div>
+                            <div class="source-percentage">55%</div>
+                            <div class="source-description">Revenue generated from online and offline appointment bookings across our platform</div>
+                        </div>
+                        
+                        <div class="source-card">
+                            <div class="source-header">
+                                <div class="source-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <div class="source-info">
+                                    <h3>Product Sales</h3>
+                                </div>
+                            </div>
+                            <div class="source-percentage">30%</div>
+                            <div class="source-description">Income from the sale of AyuNet branded health and hygiene products</div>
+                        </div>
+                        
+                        <div class="source-card">
+                            <div class="source-header">
+                                <div class="source-icon">
+                                    <i class="fas fa-ad"></i>
+                                </div>
+                                <div class="source-info">
+                                    <h3>Advertising</h3>
+                                </div>
+                            </div>
+                            <div class="source-percentage">10%</div>
+                            <div class="source-description">Revenue from advertisements and promotional partnerships</div>
+                        </div>
+                        
+                        <div class="source-card">
+                            <div class="source-header">
+                                <div class="source-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="source-info">
+                                    <h3>Partnerships</h3>
+                                </div>
+                            </div>
+                            <div class="source-percentage">5%</div>
+                            <div class="source-description">Strategic partnerships with healthcare providers and insurers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Strategies Section - Interactive -->
+    <section class="section promotion" id="promotion">
+        <div class="container">
+            <div class="section-title">
+                <h2>Promotional Strategies</h2>
+                <p>Discover how we reach and engage with our community</p>
+            </div>
+            
+            <div class="promotion-container">
+                <div class="campaign-stats">
+                    <div class="campaign-card">
+                        <div class="campaign-icon">
+                            <i class="fas fa-hospital"></i>
+                        </div>
+                        <div class="campaign-value">850+</div>
+                        <div class="campaign-label">Partner Hospitals</div>
+                    </div>
+                    <div class="campaign-card">
+                        <div class="campaign-icon">
+                            <i class="fas fa-campground"></i>
+                        </div>
+                        <div class="campaign-value">120+</div>
+                        <div class="campaign-label">Medical Camps</div>
+                    </div>
+                    <div class="campaign-card">
+                        <div class="campaign-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="campaign-value">2.3M</div>
+                        <div class="campaign-label">People Reached</div>
+                    </div>
+                    <div class="campaign-card">
+                        <div class="campaign-icon">
+                            <i class="fas fa-rss"></i>
+                        </div>
+                        <div class="campaign-value">45%</div>
+                        <div class="campaign-label">Awareness Growth</div>
+                    </div>
+                </div>
+                
+                <div class="media-channels">
+                    <h3 style="margin-bottom: 15px; color: var(--primary-color); text-align: center;">Media Channels</h3>
+                    
+                    <div class="channel-list">
+                        <div class="channel-card">
+                            <div class="channel-header">
+                                <div class="channel-icon">
+                                    <i class="fas fa-tv"></i>
+                                </div>
+                                <div class="channel-info">
+                                    <h3>Television</h3>
+                                </div>
+                            </div>
+                            <div class="channel-reach">50M+ Viewers</div>
+                            <div class="channel-description">Prime time advertisements featuring healthcare experts and celebrity endorsements</div>
+                        </div>
+                        
+                        <div class="channel-card">
+                            <div class="channel-header">
+                                <div class="channel-icon">
+                                    <i class="fas fa-newspaper"></i>
+                                </div>
+                                <div class="channel-info">
+                                    <h3>Print Media</h3>
+                                </div>
+                            </div>
+                            <div class="channel-reach">15M+ Readers</div>
+                            <div class="channel-description">Full-page advertisements in leading newspapers and health magazines</div>
+                        </div>
+                        
+                        <div class="channel-card">
+                            <div class="channel-header">
+                                <div class="channel-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="channel-info">
+                                    <h3>Digital Media</h3>
+                                </div>
+                            </div>
+                            <div class="channel-reach">30M+ Users</div>
+                            <div class="channel-description">Social media campaigns, search engine marketing, and influencer partnerships</div>
+                        </div>
+                        
+                        <div class="channel-card">
+                            <div class="channel-header">
+                                <div class="channel-icon">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                <div class="channel-info">
+                                    <h3>Outdoor</h3>
+                                </div>
+                            </div>
+                            <div class="channel-reach">20M+ People</div>
+                            <div class="channel-description">Billboards, bus shelters, and metro station advertisements in major cities</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="medical-camps">
+                    <h3 style="margin-bottom: 15px; color: var(--primary-color); text-align: center;">Upcoming Medical Camps</h3>
+                    
+                    <div class="camp-list">
+                        <div class="camp-card">
+                            <div class="camp-img">
+                                Rural Health Camp
+                            </div>
+                            <div class="camp-info">
+                                <div class="camp-location">
+                                    <i class="fas fa-map-marker-alt"></i> Pune, Maharashtra
+                                </div>
+                                <div class="camp-date">
+                                    <i class="fas fa-calendar-alt"></i> June 25, 2023
+                                </div>
+                                <div class="camp-description">
+                                    Free health check-up and awareness camp for rural communities
+                                </div>
+                                <div class="camp-actions">
+                                    <button class="register-btn">Register</button>
+                                    <button class="details-btn">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="camp-card">
+                            <div class="camp-img">
+                                Diabetes Awareness Camp
+                            </div>
+                            <div class="camp-info">
+                                <div class="camp-location">
+                                    <i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka
+                                </div>
+                                <div class="camp-date">
+                                    <i class="fas fa-calendar-alt"></i> July 2, 2023
+                                </div>
+                                <div class="camp-description">
+                                    Screening and education camp for diabetes prevention and management
+                                </div>
+                                <div class="camp-actions">
+                                    <button class="register-btn">Register</button>
+                                    <button class="details-btn">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="camp-card">
+                            <div class="camp-img">
+                                Women's Health Camp
+                            </div>
+                            <div class="camp-info">
+                                <div class="camp-location">
+                                    <i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu
+                                </div>
+                                <div class="camp-date">
+                                    <i class="fas fa-calendar-alt"></i> July 15, 2023
+                                </div>
+                                <div class="camp-description">
+                                    Specialized health camp focusing on women's health issues
+                                </div>
+                                <div class="camp-actions">
+                                    <button class="register-btn">Register</button>
+                                    <button class="details-btn">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section - Interactive -->
+    <section class="section" id="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose AyuNet</h2>
+                <p>Experience the benefits that make us the preferred healthcare platform</p>
+            </div>
+            
+            <div class="benefits-container">
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <div class="benefit-title">First Appointment Discounts</div>
+                        <div class="benefit-description">Enjoy special discounts on your initial appointment booking with us.</div>
+                        <button class="benefit-action">Claim Discount</button>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="benefit-title">Transparent Hospital Ratings</div>
+                        <div class="benefit-description">Our rating system helps you choose the best healthcare providers based on service quality.</div>
+                        <button class="benefit-action">View Ratings</button>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-ambulance"></i>
+                        </div>
+                        <div class="benefit-title">Emergency Preparedness</div>
+                        <div class="benefit-description">Highly useful for critical emergency conditions, ensuring timely assistance when every second counts.</div>
+                        <button class="benefit-action">Learn More</button>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="benefit-title">AyuNet Branded Products</div>
+                        <div class="benefit-description">Access to our quality branded products and many more added features for your well-being.</div>
+                        <button class="benefit-action">Shop Now</button>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-primary btn-large">Join AyuNet Today</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AyuNet</h3>
+                    <p>Your trusted healthcare companion, revolutionizing healthcare accessibility across India.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#appointment">Appointments</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#emergency">Emergency</a></li>
+                        <li><a href="#availability">Availability</a></li>
+                        <li><a href="#store">Store</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="#">Appointment Booking</a></li>
+                        <li><a href="#">Home Healthcare</a></li>
+                        <li><a href="#">Emergency Response</a></li>
+                        <li><a href="#">Medical Supplies</a></li>
+                        <li><a href="#">AyuNet Store</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Healthcare Ave, Mumbai, India</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> info@ayunet.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 AyuNet. All rights reserved. Committed to your well-being.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login to AyuNet</h2>
+            <div class="user-type">
+                <button type="button" class="active" data-user="patient">Patient</button>
+                <button type="button" data-user="doctor">Doctor</button>
+                <button type="button" data-user="hospital">Hospital</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn-submit">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 20px;">Don't have an account? <a href="#" id="registerLink">Register</a></p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Register with AyuNet</h2>
+            <div class="user-type">
+                <button type="button" class="active" data-user="patient">Patient</button>
+                <button type="button" data-user="doctor">Doctor</button>
+                <button type="button" data-user="hospital">Hospital</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" class="form-control" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn-submit">Register</button>
+            </form>
+            <p style="text-align: center; margin-top: 20px;">Already have an account? <a href="#" id="loginLink">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+        
+        // Modal functionality
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const closeBtns = document.querySelectorAll('.close');
+        const loginLink = document.getElementById('loginLink');
+        const registerLink = document.getElementById('registerLink');
+
+        // Open login modal
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'block';
+        });
+
+        // Open register modal
+        registerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'block';
+        });
+
+        // Close modals
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+            });
+        });
+
+        // Switch between login and register
+        registerLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'block';
+        });
+
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'none';
+            loginModal.style.display = 'block';
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
+        });
+
+        // User type selection
+        const userTypeButtons = document.querySelectorAll('.user-type button');
+        userTypeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons in the same group
+                const parent = button.parentElement;
+                parent.querySelectorAll('button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                // Add active class to clicked button
+                button.classList.add('active');
+            });
+        });
+
+        // Form submissions
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would normally send the login data to your server
+            alert('Login functionality would be implemented here');
+            loginModal.style.display = 'none';
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would normally send the registration data to your server
+            alert('Registration functionality would be implemented here');
+            registerModal.style.display = 'none';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Appointment tabs functionality
+        const appointmentTabs = document.querySelectorAll('.appointment-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        appointmentTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                appointmentTabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Doctor card selection
+        const doctorCards = document.querySelectorAll('.doctor-card');
+        doctorCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove selected class from all cards
+                doctorCards.forEach(c => c.classList.remove('selected'));
+                
+                // Add selected class to clicked card
+                card.classList.add('selected');
+                
+                // Update booking summary with selected doctor
+                const doctorName = card.querySelector('h4').textContent;
+                const hospitalName = card.querySelector('p').textContent.split(' • ')[1];
+                
+                document.querySelector('.booking-summary .summary-row:nth-child(1) span:last-child').textContent = doctorName;
+                document.querySelector('.booking-summary .summary-row:nth-child(2) span:last-child').textContent = hospitalName;
+            });
+        });
+
+        // Calendar day selection
+        const calendarDays = document.querySelectorAll('.calendar-day:not(.disabled):not(:first-child)');
+        calendarDays.forEach(day => {
+            day.addEventListener('click', () => {
+                // Remove selected class from all days
+                calendarDays.forEach(d => d.classList.remove('selected'));
+                
+                // Add selected class to clicked day
+                day.classList.add('selected');
+                
+                // Update booking summary with selected date
+                const dayNumber = day.textContent;
+                const monthYear = document.querySelector('.calendar-header h3').textContent;
+                document.querySelector('.booking-summary .summary-row:nth-child(3) span:last-child').textContent = `${dayNumber} ${monthYear}`;
+            });
+        });
+
+        // Time slot selection
+        const timeSlots = document.querySelectorAll('.time-slot:not(.disabled)');
+        timeSlots.forEach(slot => {
+            slot.addEventListener('click', () => {
+                // Remove selected class from all slots
+                timeSlots.forEach(s => s.classList.remove('selected'));
+                
+                // Add selected class to clicked slot
+                slot.classList.add('selected');
+                
+                // Update booking summary with selected time
+                document.querySelector('.booking-summary .summary-row:nth-child(4) span:last-child').textContent = slot.textContent;
+            });
+        });
+
+        // Service tabs functionality
+        const serviceTabs = document.querySelectorAll('.service-tab');
+        serviceTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                serviceTabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Service package selection
+        const servicePackages = document.querySelectorAll('.service-package');
+        servicePackages.forEach(pkg => {
+            pkg.addEventListener('click', () => {
+                // Remove selected class from all packages
+                servicePackages.forEach(p => p.classList.remove('selected'));
+                
+                // Add selected class to clicked package
+                pkg.classList.add('selected');
+                
+                // Update button text
+                pkg.querySelector('.btn-primary').textContent = 'Selected';
+            });
+        });
+
+        // Frequency option selection
+        const frequencyOptions = document.querySelectorAll('.frequency-option');
+        frequencyOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                frequencyOptions.forEach(o => o.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                option.classList.add('selected');
+            });
+        });
+
+        // Resource type selection
+        const resourceTypes = document.querySelectorAll('.resource-type');
+        resourceTypes.forEach(type => {
+            type.addEventListener('click', () => {
+                // Remove active class from all types
+                resourceTypes.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked type
+                type.classList.add('active');
+            });
+        });
+
+        // Product category selection
+        const productCategories = document.querySelectorAll('.product-category');
+        productCategories.forEach(category => {
+            category.addEventListener('click', () => {
+                // Remove active class from all categories
+                productCategories.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked category
+                category.classList.add('active');
+            });
+        });
+
+        // Quantity control
+        const quantityBtns = document.querySelectorAll('.quantity-btn');
+        quantityBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const input = btn.parentElement.querySelector('.quantity-input');
+                let value = parseInt(input.value);
+                
+                if (btn.textContent === '+') {
+                    value++;
+                } else if (btn.textContent === '-' && value > 1) {
+                    value--;
+                }
+                
+                input.value = value;
+            });
+        });
+
+        // Benefit card selection
+        const benefitCards = document.querySelectorAll('.benefit-card');
+        benefitCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Toggle selected class
+                card.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
+</html>
